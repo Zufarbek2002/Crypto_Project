@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -35,8 +35,8 @@ const CustomPaginationItem = styled(PaginationItem)(({ theme }) => ({
 }));
 
 const TableComp = () => {
-  const { data, page, setPage, currency } = useContext(DataContext);
-  const handlePage = (event, value) => {
+  const { filtered, data, dataAll, page, setPage, currency } = useContext(DataContext);
+  const handlePage = (e, value) => {
     setPage(value);
   };
 
@@ -62,15 +62,19 @@ const TableComp = () => {
           </TableRow>
         </TableHead>
         <TableBody sx={{ backgroundColor: "#16171A" }}>
-          {data?.map((data) => (
-            <TableRowComp key={data.id} data={data} currency={currency} />
-          ))}
+          {filtered.length > 0
+            ? filtered?.map((data) => (
+                <TableRowComp key={data.id} data={data} currency={currency} />
+              ))
+            : data?.map((data) => (
+                <TableRowComp key={data.id} data={data} currency={currency} />
+              ))}
         </TableBody>
       </Table>
       <div className="flex justify-center py-5">
         <Stack spacing={2}>
           <Pagination
-            count={data?.length}
+            count={dataAll?.length / 10}
             page={page}
             onChange={handlePage}
             renderItem={(item) => <CustomPaginationItem {...item} />}
