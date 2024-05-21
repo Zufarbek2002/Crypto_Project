@@ -11,7 +11,7 @@ import { Autoplay } from "swiper/modules";
 const Hero = () => {
   const { data, currency } = useContext(DataContext);
   return (
-    <div className="bg-[url('./src/assets/hero-bg.png')]  bg-[center_top_60px] bg-no-repeat bg-cover pt-16">
+    <div className="bg-hero-bg bg-[center_top_60px] bg-no-repeat bg-cover pt-16">
       <div className="container mx-auto text-white flex flex-col items-center xl:px-52 sm:px-10 px-5 gap-16 py-10">
         <div className="text-center">
           <h1 className="text-main-color text-4xl leading-[50px] sm:text-6xl sm:leading-[72px] font-bold">
